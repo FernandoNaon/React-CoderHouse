@@ -1,8 +1,8 @@
-export async function getData() {
-    const response = await fetch(process.env.PUBLIC_URL + '/json/products.json')
-    const data = await response.json();
-    return data;
-}
+// export async function getData() {
+//     const response = await fetch(process.env.PUBLIC_URL + '/json/products.json')
+//     const data = await response.json();
+//     return data;
+// }
 
 /*::::::::::::::::::::::::::::::::::: API ML ::::::::::::::::::::::::::::::::::::: */
 

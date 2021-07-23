@@ -1,32 +1,28 @@
 import { ItemList } from '../ItemList';
-import { useEffect, useState } from 'react';
-import { getData } from '../../Utils/const';
+import { useEffect, useState, useContext} from 'react';
 import { useParams } from 'react-router-dom';
+import { CartContext } from '../../context/CartContext';
+
+
 
 export const ItemListContainer = () => {
-  const { id } = useParams();
-  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const waitForData = async () => {
-      let data = await getData();
-      if (id) {
-        data = data.filter(item => item.category === id)
-      }
-      setProducts(data)
-    };
+  const {productos} = useContext(CartContext)
+  const { categoryId } = useParams()
+  const [filtro, setFiltro] = useState([]);
 
-    waitForData();
-  }, [id]);
-
-
+  useEffect(()=>{
+    if(categoryId && productos){
+        const itemsFound = productos.docs.filter(item=>item.data().categoria === categoryId)
+        setFiltro(itemsFound)
+    } else if (productos){
+        setFiltro(productos.docs)
+    }
+},[categoryId, productos])
+    
   return (
-    <div>
-      {
-        !!products.length
-          ? <ItemList products={products} />
-          : 'Loading...'
-      }
-    </div>
+      <div>
+        <ItemList product={filtro}/>
+      </div>
   )
 }

@@ -6,7 +6,7 @@ import { CartContext } from '../../context/CartContext'
 export const CheckOut = () => {
     const {cart, subTotal, clear} = useContext(CartContext);
 
-    async function itemsAActualizar() { 
+    async function itemsUpDate() { 
         const itemsToUpdate = db.collection("items")
         .where("id", "in", cart.map(i => i.id));
 
@@ -52,7 +52,7 @@ export const CheckOut = () => {
             telefono: formulario['telefono'].value,
             email: formulario['email'].value,
         }
-        const respuesta = await itemsAActualizar();
+        const respuesta = await itemsUpDate();
         if (respuesta.status === "ok"){
             await finalizarCompra(comprador);
         

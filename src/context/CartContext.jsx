@@ -1,22 +1,25 @@
 import { createContext, useState, useEffect } from 'react';
-import {db} from '../firebaseConfig'
+import { getFirestore } from '../firebaseConfig';
 
-export const CartContext = createContext()
+   
+    export const CartContext = createContext()
+    export const CartContextComponent = ({children}) => {
+        const [cart, setCart] = useState([])
+        const [products, setProducts] = useState([]);
 
-export const CartContextComponent = ({children}) => {
-    
-    const [cart, setCart] = useState([])
-    const [productos, setProductos] = useState(null);
 
-    useEffect(()=>{
-        async function fetchData(){
-            const docs = await db.collection("productos").get()
-            setProductos(docs)
-        }
-    fetchData()
-    },[])
+        useEffect (() =>{
+            async function getData(){
+                const db = getFirestore();
+                const collection = db.collection('productos')
+                const response = await collection.get()
+                console.log(response.docs.map(element => element.data()));
+                setProducts(collection)
+            }
+            getData();
+        },[])
 
-    const addItem =(producto, cantidad) => {
+        const addItem =(producto, cantidad) => {
     const index = cart.findIndex(item => item.id === producto.id) 
         if(index=== -1) setCart([...cart, {...producto, cantidad}])
         else {setCart(() => {
@@ -43,7 +46,7 @@ export const CartContextComponent = ({children}) => {
         }
 
     return (
-        <CartContext.Provider value={{cart, addItem, clear, removeItem, subTotal, productos}} >
+        <CartContext.Provider value={{cart, addItem, clear, removeItem, subTotal, products}} >
             {children}
         </CartContext.Provider>
             )

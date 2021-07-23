@@ -1,29 +1,25 @@
 import { ItemDetail } from '../ItemDetail';
-import { getData } from '../../Utils/const'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
+import { CartContext } from '../../context/CartContext';
 
 export const ItemDetailContainer = () => {
 
   const { id } = useParams()
   const [item, setItem] = useState()
+  const { productos } = useContext(CartContext)
+  console.log(productos, item)
 
   useEffect(() => {
-    const waitForData = async () => {
-      let items = await getData();
-      let item = items.find(item => item.id === id)
-      setItem(item)
-    }
-    setTimeout(() => {
-      waitForData()
-
-    }, 1000)
-  }, [id])
-
+     if (productos){
+      const itemFound = productos.docs.find(producto=>producto.data().id == id)
+      setItem(itemFound)
+   }
+  },[id, productos])
   return (
     <div>
       {
-        item && <ItemDetail item={item} />
+        item && <ItemDetail productos={item.data} />
       }
     </div>
   )
