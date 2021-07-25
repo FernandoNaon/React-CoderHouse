@@ -8,16 +8,16 @@ import { getFirestore } from '../firebaseConfig';
         const [products, setProducts] = useState([]);
 
 
-        useEffect (() =>{
-            async function getData(){
+        useEffect(() => {
+            async function getData() {
                 const db = getFirestore();
-                const collection = db.collection('productos')
-                const response = await collection.get()
-                console.log(response.docs.map(element => element.data()));
-                setProducts(collection)
-            }
-            getData();
-        },[])
+                const collection = db.collection('items');
+                const response = await collection.get();
+                let items = response.docs.map((doc) => { return { ...doc.data(), id: doc.id }}); 
+                setProducts(items);
+              }
+              getData();
+            }, [])
 
         const addItem =(producto, cantidad) => {
     const index = cart.findIndex(item => item.id === producto.id) 

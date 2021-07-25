@@ -7,19 +7,19 @@ export const ItemDetailContainer = () => {
 
   const { id } = useParams()
   const [item, setItem] = useState()
-  const { productos } = useContext(CartContext)
-  console.log(productos, item)
+  const { products } = useContext(CartContext)
+  console.log(products, item)
 
   useEffect(() => {
-     if (productos){
-      const itemFound = productos.docs.find(producto=>producto.data().id == id)
+     if (products){
+      const itemFound = products.docs.find(producto=>producto.data().id === id)
       setItem(itemFound)
    }
-  },[id, productos])
+  },[id, products])
   return (
     <div>
       {
-        item && <ItemDetail productos={item.data} />
+        item && <ItemDetail products={item.data} />
       }
     </div>
   )

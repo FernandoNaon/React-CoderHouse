@@ -7,22 +7,28 @@ import { CartContext } from '../../context/CartContext';
 
 export const ItemListContainer = () => {
 
-  const {productos} = useContext(CartContext)
+  const {products} = useContext(CartContext)
   const { categoryId } = useParams()
   const [filtro, setFiltro] = useState([]);
 
   useEffect(()=>{
-    if(categoryId && productos){
-        const itemsFound = productos.docs.filter(item=>item.data().categoria === categoryId)
+    if(categoryId && products){
+        const itemsFound = products.docs.filter(item=>item.data().categoria === categoryId)
         setFiltro(itemsFound)
-    } else if (productos){
-        setFiltro(productos.docs)
+    } else if (products){
+        setFiltro(products.docs)
     }
-},[categoryId, productos])
+},[categoryId, products])
+
+
     
   return (
       <div>
-        <ItemList product={filtro}/>
+     {
+     !!products
+    ? <ItemList items={filtro} />
+    : 'Loading...'
+}
       </div>
   )
 }
