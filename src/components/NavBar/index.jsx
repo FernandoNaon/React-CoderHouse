@@ -5,8 +5,7 @@ import { NavLink, Link } from 'react-router-dom'
 
 export const NavBar = () => {
   return (
-    <div>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" sticky='top' variant="dark">
         <Link to="/">
           <Navbar.Brand>Strymon Pedals</Navbar.Brand>
         </Link>
@@ -15,13 +14,12 @@ export const NavBar = () => {
           <Nav.Link as={NavLink} activeClassName="active" to="/category/delay">Delay</Nav.Link>
           <Nav.Link as={NavLink} activeClassName="active" to="/category/Modulation">Modulation</Nav.Link>
           <Nav.Link as={NavLink} activeClassName="active" to="/category/drive">Drive and Preamp</Nav.Link>
-
-
         </Nav>
         <Form inline>
-          <Button variant="outline-info"><CartWidget /></Button>
+          <Button variant="outline-info">
+            <CartWidget />
+         </Button>
         </Form>
       </Navbar>
-    </div>
   )
 }

@@ -5,21 +5,21 @@ import { CartContext } from '../../context/CartContext';
 
 export const ItemDetailContainer = () => {
 
-  const { id } = useParams()
+  const { itemId } = useParams()
   const [item, setItem] = useState()
   const { products } = useContext(CartContext)
-  console.log(products, item)
-
+  
   useEffect(() => {
-     if (products){
-      const itemFound = products.docs.find(producto=>producto.data().id === id)
+     if (products) {
+      const itemFound = products.find(producto => producto.id === itemId)
       setItem(itemFound)
    }
-  },[id, products])
+  },[itemId, products])
+
   return (
     <div>
       {
-        item && <ItemDetail products={item.data} />
+        item && <ItemDetail item={item} />
       }
     </div>
   )

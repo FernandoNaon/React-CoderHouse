@@ -1,3 +1,20 @@
 .description {
     white-space: break-spaces;
 }
+
+.imgDetail{
+  width:50%;
+  height: auto;
+
+}
+
+.itemDetail{
+    margin-top: 20px;
+    padding: 2px 16px;
+    list-style: none outside;
+    text-align: center;
+    border: black;
+    border-width: 15px;
+    border-radius: 15px; 
+
+}

@@ -1,12 +1,14 @@
-import './App.css';
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import './App.css';
 import { NavBar } from './components/NavBar';
 import { ItemListContainer } from './components/ItemListContainer'
 import { ItemDetailContainer } from './components/ItemDetailContainer';
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Footer from './components/Footer';
-import {CartContextComponent} from './context/CartContext';
-import { CartComponent } from './components/Cart'
+import { Footer } from './components/Footer';
+import { CheckOut } from './components/CheckOut'
+import { CartContextComponent } from './context/CartContext';
+import { CartComponent } from './components/Cart';
+
  
 function App() {
 
@@ -18,14 +20,17 @@ function App() {
         <Route path="/" exact >
           <ItemListContainer />
         </Route>
-        <Route path="/category/:id" >
+        <Route path="/category/:categoryId" >
           <ItemListContainer />
         </Route>
-        <Route path="/item/:id" >
+        <Route path="/item/:itemId" >
           <ItemDetailContainer />
         </Route>
         <Route path="/cart" >
           <CartComponent />
+        </Route>
+        <Route path="/checkout" >
+          <CheckOut />
         </Route>
       </Switch>
       <Footer />

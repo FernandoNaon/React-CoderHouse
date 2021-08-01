@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react'
 import { CartContext } from '../../context/CartContext'
 
-export const ItemCount = (item, onAdd) => {
+export const ItemCount = ({ item }) => {
 
     const [valor, setValor] = useState(1)
 
-    const {addItem}= useContext (CartContext)
+    const { addItem }= useContext (CartContext)
 
     function sumar() {
         if (valor < item.stock) {
@@ -20,16 +20,15 @@ export const ItemCount = (item, onAdd) => {
     }
 
     return (
+      <>
         <div>
             <button onClick={restar}>-</button>
             <input size="1" type="text" value={valor} readOnly />
             <button onClick={sumar}>+</button><br/>
-            <button onClick={() => {
-                addItem(item,valor)
-                onAdd(valor)
-            }}>Agregar al Carrito
-            </button>
         </div>
+            <button onClick={() => { addItem(item,valor) }}>
+                Agregar al Carrito
+            </button>
+     </>
     )
-
 }

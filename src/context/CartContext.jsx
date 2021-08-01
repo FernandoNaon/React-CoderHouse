@@ -2,7 +2,8 @@ import { createContext, useState, useEffect } from 'react';
 import { getFirestore } from '../firebaseConfig';
 
    
-    export const CartContext = createContext()
+    export const CartContext = createContext();
+
     export const CartContextComponent = ({children}) => {
         const [cart, setCart] = useState([])
         const [products, setProducts] = useState([]);
@@ -13,19 +14,23 @@ import { getFirestore } from '../firebaseConfig';
                 const db = getFirestore();
                 const collection = db.collection('items');
                 const response = await collection.get();
-                let items = response.docs.map((doc) => { return { ...doc.data(), id: doc.id }}); 
+                let items = response.docs.map((doc) => { return { ...doc.data(), id: doc.id } }); 
                 setProducts(items);
               }
               getData();
             }, [])
 
-        const addItem =(producto, cantidad) => {
-    const index = cart.findIndex(item => item.id === producto.id) 
-        if(index=== -1) setCart([...cart, {...producto, cantidad}])
-        else {setCart(() => {
-            cart[index].cantidad=cantidad
+        const addItem =(item, quantity) => {
+         const index = cart.findIndex(obj => obj.item.id === item.id) 
+        if(index=== -1) {
+            setCart([...cart, { item, quantity }])
+        }
+        else {
+            setCart(() => {
+            cart[index].quantity=quantity
             return [...cart]
-        })}
+        })
+      }
     }
 
     function clear(){
@@ -33,21 +38,32 @@ import { getFirestore } from '../firebaseConfig';
     }
 
     function removeItem(id) {
-        const filteredCart = cart.filter((item) => item.id !== id);
+        const filteredCart = cart.filter((obj) => obj.item.id !== id);
         setCart(filteredCart);
         
     }
-      function subTotal(){
-          
-        const valor = cart.reduce((acumulador, item)=>{
-            return (acumulador += (item.precio * item.cantidad))
-          },0)
-          return valor
-        }
+    
+    function getTotal(){
+        const valor = cart.reduce((acumulador, obj) => {
+            return (acumulador += (Number(obj.item.price) * Number(obj.quantity)))
+        }, 0)
+        return valor
+    }
+    
+    const getTotalQty = () => {
+        let qty = 0;
+        cart.forEach(obj => {
+            let quantity = obj.quantity;
+            qty += quantity;
+        });
+        return qty;
+    }
+        
 
     return (
-        <CartContext.Provider value={{cart, addItem, clear, removeItem, subTotal, products}} >
+        <CartContext.Provider value={{cart, addItem, clear, removeItem, getTotal, products, getTotalQty }} >
             {children}
         </CartContext.Provider>
             )
 }
+
