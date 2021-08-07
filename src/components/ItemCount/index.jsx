@@ -22,11 +22,11 @@ export const ItemCount = ({ item }) => {
     return (
       <>
         <div>
-            <button onClick={restar}>-</button>
-            <input size="1" type="text" value={valor} readOnly />
-            <button onClick={sumar}>+</button><br/>
+            <button className="btn btn-outline-primary" onClick={restar}>-</button>
+            <input  size="1" type="text" value={valor} readOnly />
+            <button className="btn btn-outline-primary" onClick={sumar}>+</button><br/>
         </div>
-            <button onClick={() => { addItem(item,valor) }}>
+            <button className="btn btn-primary" onClick={() => { addItem(item,valor) }}>
                 Agregar al Carrito
             </button>
      </>

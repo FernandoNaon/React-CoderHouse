@@ -33,17 +33,17 @@ import { getFirestore } from '../firebaseConfig';
       }
     }
 
-    function clear(){
+   const clear = () => {
         setCart([])
     }
 
-    function removeItem(id) {
+    const removeItem = (id) => {
         const filteredCart = cart.filter((obj) => obj.item.id !== id);
         setCart(filteredCart);
         
     }
     
-    function getTotal(){
+    const getTotal = () => {
         const valor = cart.reduce((acumulador, obj) => {
             return (acumulador += (Number(obj.item.price) * Number(obj.quantity)))
         }, 0)
@@ -58,10 +58,24 @@ import { getFirestore } from '../firebaseConfig';
         });
         return qty;
     }
+
+    const createOrder = (name, phone, email) => {
+      const order = { 
+        buyer: {name, phone, email },
+        item: cart, 
+        total: getTotal(), 
+      }
+      const db = getFirestore();
+      db.collection('orders').add(order).then(response => {
+        console.log(response)
+      })
+  
+
+    }
         
 
     return (
-        <CartContext.Provider value={{cart, addItem, clear, removeItem, getTotal, products, getTotalQty }} >
+        <CartContext.Provider value={{cart, addItem, clear, removeItem, getTotal, products, getTotalQty, createOrder }} >
             {children}
         </CartContext.Provider>
             )

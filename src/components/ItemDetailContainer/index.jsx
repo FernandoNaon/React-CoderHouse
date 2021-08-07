@@ -2,6 +2,7 @@ import { ItemDetail } from '../ItemDetail';
 import { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
+import { Alert } from "react-bootstrap";
 
 export const ItemDetailContainer = () => {
 
@@ -19,7 +20,11 @@ export const ItemDetailContainer = () => {
   return (
     <div>
       {
-        item && <ItemDetail item={item} />
+        !!products 
+        ? item && <ItemDetail item={item} /> 
+        : <Alert key={1} variant="danger" align="left" className={"mt-3"}>
+           Producto no encontrado.{" "}
+          </Alert>   
       }
     </div>
   )

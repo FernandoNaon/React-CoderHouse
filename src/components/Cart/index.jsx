@@ -13,7 +13,7 @@ export const CartComponent = () => {
           cart.map(
             obj => {
               return (
-                <div className="card d-flex flex-row justify-content-between" key={obj.item.id}>
+                <div className="card d-flex flex-row justify-content-between mt-3" key={obj.item.id}>
                   <h2>{obj.item.title}</h2>
                   <p>Cantidad: {obj.quantity}</p>
                   <p>Precio: {obj.item.price}</p>
@@ -25,11 +25,13 @@ export const CartComponent = () => {
             }
           )
         }
-        <div>TOTAL: {getTotal()}</div>
-        <button onClick={clear}>Vaciar Carrito</button>
-        <div><Link to="/checkout">Finalizar Compra </Link></div>
-
+      <div>TOTAL: {getTotal()}</div>
+        <button  className="btn btn-danger" onClick={clear}>Vaciar Carrito</button>
+        <Link to="/checkout"><button className="btn btn-primary">Comprar</button></Link>  
       </div>
+      
       : <div><Link to="/">Seguir comprando </Link></div>
+   
+  
   )
 }

@@ -1,13 +1,12 @@
 import 'react-bootstrap'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import './style.css';
 
 
 export const Item = ({ item }) => {
   return (
-      <div>
-        <Card className="container">
+    <div style={{'width':'100%', 'textAlign':'center'}}>
+        <Card className="container" style={{ width: '25rem', padding: '1rem', display: 'inline-block' }}>
             <Card.Img className="pic" variant="top" src={item.pictureUrl} />
             <Card.Body className="cardContainer">
                 <Link to={"/item/" + item.id}>

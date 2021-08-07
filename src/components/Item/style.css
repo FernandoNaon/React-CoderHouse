@@ -1,17 +1,16 @@
 .pic{
-   width: 100%;
+width: 100%;
 height: auto;
-
 display: block;
 border: none;
 box-shadow: none;
 }
 
 .container{
+  margin-top: 15px;
   background: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  margin-top: 20px;
-  list-style: none outside;
+  margin-right: 15px;
   text-align: center;
   border: black;
   border-width: 15px;

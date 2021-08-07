@@ -1,12 +1,19 @@
 .description {
     white-space: break-spaces;
+    padding-bottom: 15px;
+}
+
+h2{
+  font-size: 50px;
 }
 
 .imgDetail{
-  width:50%;
+  width:40%;
   height: auto;
+  background: black;
 
 }
+
 
 .itemDetail{
     margin-top: 20px;

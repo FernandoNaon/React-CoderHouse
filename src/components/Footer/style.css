@@ -1,8 +1,14 @@
 .main-footer{
     background-color: #343a40;
-    
+    position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   box-sizing: border-box;
 }
 
 .text-xs-center{
     color: #fff;
 }
+
