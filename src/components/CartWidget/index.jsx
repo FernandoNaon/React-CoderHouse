@@ -13,7 +13,7 @@ export const CartWidget = () => {
   }, [cart])
 
   return (
-    <Link to="/cart">
+    <Link to="/checkout">
       <FontAwesomeIcon icon={faShoppingCart} />
       <span>{totalQty}</span>
     </Link>

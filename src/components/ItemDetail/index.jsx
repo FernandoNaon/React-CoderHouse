@@ -12,7 +12,7 @@ export const ItemDetail = ({ item }) => {
       <p>stock: {item.stock}</p>
       <ItemCount item={item} /><br/>
       <div className="d-grid gap-2 col-6 mx-auto p-4">
-      <Link to='/cart'><button className="btn btn-secondary p-4'">IR AL CARRITO</button></Link>  
+      <Link to='/checkout'><button className="btn btn-secondary p-4'">IR AL CARRITO</button></Link>  
       </div>    
       <h6>DESCRIPCION</h6>     
       <p className="description">{item.description}</p>

@@ -7,7 +7,6 @@ import { ItemDetailContainer } from './components/ItemDetailContainer';
 import { Footer } from './components/Footer';
 import { CheckOut } from './components/CheckOut'
 import { CartContextComponent } from './context/CartContext';
-import { CartComponent } from './components/Cart';
 
  
 function App() {
@@ -25,9 +24,6 @@ function App() {
         </Route>
         <Route path="/item/:itemId" >
           <ItemDetailContainer />
-        </Route>
-        <Route path="/cart" >
-          <CartComponent />
         </Route>
         <Route path="/checkout" >
           <CheckOut />

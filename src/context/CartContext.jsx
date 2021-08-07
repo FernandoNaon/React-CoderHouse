@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import { getFirestore } from '../firebaseConfig';
+import firebase from 'firebase/app';
 
    
     export const CartContext = createContext();
@@ -60,19 +61,27 @@ import { getFirestore } from '../firebaseConfig';
     }
 
     const createOrder = (name, phone, email) => {
-      const order = { 
-        buyer: {name, phone, email },
-        item: cart, 
-        total: getTotal(), 
-      }
-      const db = getFirestore();
-      db.collection('orders').add(order).then(response => {
-        console.log(response)
-      })
-  
-
+        const db = getFirestore();
+        const order = { buyer: {name, phone, email },item: cart, date: firebase.firestore.Timestamp.fromDate(new Date()), total: getTotal()}
+      db.collection('orders').add(order).then(({id}) => {
+        console.log(id);
+      });
     }
-        
+
+  useEffect(() => {
+    const localCart = localStorage.getItem("cart");
+    if (!localCart) localStorage.setItem("cart", JSON.stringify([]));
+    else {
+      setProducts(JSON.parse(localCart));
+      setCart(JSON.parse(localCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart, products, getTotal]);
+
+  
 
     return (
         <CartContext.Provider value={{cart, addItem, clear, removeItem, getTotal, products, getTotalQty, createOrder }} >
